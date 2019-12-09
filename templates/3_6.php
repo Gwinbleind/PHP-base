@@ -22,7 +22,7 @@ $menu = [
             ["№9","/?page=3_9"],
         ],
     ],
-    ["Контакты","https://github.com/Gwinbleind/PHP-base/pull/2"]
+    ["Контакты","https://github.com/Gwinbleind/PHP-base/pull/3"]
 ];
 
 include "menu_recursive.php";
