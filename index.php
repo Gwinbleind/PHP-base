@@ -6,13 +6,10 @@ if (isset($_GET['page'])) {
     $page = 'index';
 }
 
+echo renderTemplate('layout', renderTemplate($page), renderTemplate('menu'));
 
-$menu = renderTemplate('menu');
-echo renderTemplate('layout', renderTemplate($page));
-
-function renderTemplate($page, $content = '')
+function renderTemplate($page, $content = '', $menu = '')
 {
-    global $menu;
     ob_start();
     include "templates/{$page}.php";
     return ob_get_clean();

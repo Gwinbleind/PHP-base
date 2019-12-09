@@ -1,3 +1,4 @@
 <a href="/">Главная</a>
-<a href="/?page=catalog">Каталог</a>
-<a href="/?page=about">О нас</a><br>
+<?php for ($i=1; $i <= 9; $i++): ?>
+<a href="/?page=3_<?=$i?>">№<?=$i?></a>
+<?endfor;?>
