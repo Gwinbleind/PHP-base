@@ -1,5 +1,19 @@
 <?php
-include "2_1.php";
-include "2_2.php";
-include "2_3.php";
-include "2_4.php";
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 'index';
+}
+
+
+$menu = renderTemplate('menu');
+echo renderTemplate('layout', renderTemplate($page));
+
+function renderTemplate($page, $content = '')
+{
+    global $menu;
+    ob_start();
+    include "templates/{$page}.php";
+    return ob_get_clean();
+}
