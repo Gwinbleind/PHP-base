@@ -13,11 +13,11 @@ foreach ($files as $file):?>
 <?php
 if (isset($_POST["load"])) {
     $tmp_path = $_FILES["myFile"]["tmp_name"];
-    $upload_path = "./gallery/big/" . $_FILES["myFile"]["name"];
+    $upload_path = GALLERY_DIR . $_FILES["myFile"]["name"];
     $ext = strtolower(pathinfo($upload_path, PATHINFO_EXTENSION));
 
     if (in_array($ext, ALLOWED_EXTENSIONS)) {
-       $resize_path = "./gallery/small/" . $_FILES["myFile"]["name"];
+       $resize_path = MINIATURE_DIR . $_FILES["myFile"]["name"];
 
        if (move_uploaded_file($tmp_path, $upload_path)) {
            header("Location: /");

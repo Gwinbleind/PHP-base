@@ -3,7 +3,8 @@
 Сразу перевел все ссылки в realpath, по 4-му движку.<br>
 
 <?php
+$files = array_splice(scandir(GALLERY_DIR),2);
 $dir = "gallery/big";
-$files = array_splice(scandir($dir),2);
+//var_dump($files);
 
 include "gallery.php";
