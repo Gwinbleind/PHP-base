@@ -1,20 +1,15 @@
 <?php
 include realpath('../configs/config.php');
-include realpath('../engine/functions.php');
-
 if (isset($_GET['page'])) {
-    $page = $_GET['page'];
+    extract($_GET);
 } else {
     $page = 'index';
 }
 
-$params = [
-    "menu" => [
-        [
-            "title" => "Главная",
-            "href" => "/"
-        ],
-    ]
-];
-
+switch ($page) {
+    case 'img_full':
+        $params['imgID'] = $_GET['imgID'];
+        break;
+}
+$params['db'] = $db;
 echo renderLayout($page, $params);

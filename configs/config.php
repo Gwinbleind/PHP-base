@@ -1,5 +1,21 @@
 <?php
+$params = [
+    "menu" => [
+        [
+            "title" => "Галерея",
+            "href" => "/"
+        ],
+        [
+            "title" => "Картинка",
+            "href" => "/?page=img_full&imgID=1"
+        ]
+    ]
+];
+
 define(TEMPLATE_DIR, realpath('../templates/')."/");
 define(GALLERY_DIR, realpath("../public/gallery/big/")."/");
 define(MINIATURE_DIR, realpath("../public/gallery/small/")."/");
 define(ALLOWED_EXTENSIONS, ["png", "jpg", "bmp", "jpeg"]);
+
+$db = @mysqli_connect('localhost:3306','geek','geek','gb_php') or Die('Ошибка соединения: ' . mysqli_connect_error());
+include realpath('../engine/functions.php');

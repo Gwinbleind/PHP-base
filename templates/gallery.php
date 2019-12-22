@@ -1,8 +1,9 @@
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
 <?php
-foreach ($files as $file):?>
-    <a style="margin: 10px" href="gallery/big/<?=$file?>">
-        <img src="gallery/small/<?=$file?>" alt="">
+$result = mysqli_query($db,'SELECT * FROM gallery ORDER BY views DESC');
+foreach ($result as $file):?>
+    <a style="margin: 10px" href="/?page=img_full&imgID=<?=$file['id']?>">
+        <img src="<?=$file['prev']?>" alt="">
     </a>
 <?endforeach;?>
 </div>
@@ -17,7 +18,8 @@ if (isset($_POST["load"])) {
     $ext = strtolower(pathinfo($upload_path, PATHINFO_EXTENSION));
 
     if (in_array($ext, ALLOWED_EXTENSIONS)) {
-       $resize_path = MINIATURE_DIR . $_FILES["myFile"]["name"];
+    	  mysqli_query($db,"INSERT INTO gallery (`id`, `img`, `prev`, `name`, `views`) VALUES (NULL, 'gallery/big/{$_FILES["myFile"]["name"]}', 'gallery/small/{$_FILES["myFile"]["name"]}', '{$_FILES["myFile"]["name"]}', '0');");
+	     $resize_path = MINIATURE_DIR . $_FILES["myFile"]["name"];
 
        if (move_uploaded_file($tmp_path, $upload_path)) {
            header("Location: /");
@@ -25,6 +27,5 @@ if (isset($_POST["load"])) {
            echo "Что-то пошло не так!<br>";
        }
        include "resize.php";
-   }
+	 }
 }
-
