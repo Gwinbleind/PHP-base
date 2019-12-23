@@ -7,8 +7,11 @@ if (isset($_GET['page'])) {
 }
 
 switch ($page) {
+    case 'gallery':
+        $params['gallery'] = getGallery($db);
+        break;
     case 'img_full':
-        $params['imgID'] = $_GET['imgID'];
+        $params['imgFull'] = getOneImg($db, $_GET['imgID']);
         break;
 }
 $params['db'] = $db;

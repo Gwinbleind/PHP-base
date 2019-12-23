@@ -2,11 +2,15 @@
 $params = [
     "menu" => [
         [
-            "title" => "Галерея",
+            "title" => "Главная",
             "href" => "/"
         ],
         [
-            "title" => "Картинка",
+            "title" => "Галерея",
+            "href" => "/?page=gallery"
+        ],
+        [
+            "title" => "Картинка #1",
             "href" => "/?page=img_full&imgID=1"
         ]
     ]
