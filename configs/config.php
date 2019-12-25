@@ -6,13 +6,21 @@ $params = [
             "href" => "/"
         ],
         [
-            "title" => "Галерея",
-            "href" => "/?page=gallery"
+            "title" => "1. Калькулятор",
+            "href" => "/?page=1calc"
         ],
         [
-            "title" => "Картинка #1",
-            "href" => "/?page=img_full&imgID=1"
-        ]
+            "title" => "2. Калькулятор",
+            "href" => "/?page=2calc"
+        ],
+        [
+            "title" => "3. Отзывы",
+            "href" => "/?page=review"
+        ],
+        [
+            "title" => "4. Каталог",
+            "href" => "/?page=catalog"
+        ],
     ]
 ];
 

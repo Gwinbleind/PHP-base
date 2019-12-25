@@ -38,27 +38,36 @@ function viewsIncrement ($db, $id) {
 function insertNewRow($db, $name) {
     return mysqli_query($db, "INSERT INTO gallery (`id`, `img`, `prev`, `name`, `views`) VALUES (NULL, 'gallery/big/{$name}', 'gallery/small/{$name}', '{$name}', '0');");
 }
-function uploadNewImg($db, $img) {
-    $tmp_path = $img["tmp_name"];
-    $upload_path = GALLERY_DIR . $img["name"];
-    $ext = strtolower(pathinfo($upload_path, PATHINFO_EXTENSION));
-
-    if (in_array($ext, ALLOWED_EXTENSIONS)) {
-        insertNewRow($db, $img["name"]);
-        $resize_path = MINIATURE_DIR . $img["name"];
-
-        if (move_uploaded_file($tmp_path, $upload_path)) {
-            header("Location: /");
-        } else {
-            echo "Что-то пошло не так!<br>";
-        }
-        resizeImg($upload_path, $resize_path);
+//Функции калькулятора
+function amount(float $a, float $b) {
+    return $a + $b;
+}
+function difference(float $a, float $b) {
+    return $a - $b;
+}
+function multiplication(float $a, float $b) {
+    return $a * $b;
+}
+function division(float $a, float $b) {
+    if ($b == 0) {
+        return "Error: divided by zero";
+    } else {
+        return $a / $b;
     }
 }
-function resizeImg($upload_path, $resize_path) {
-    include "classSimpleImage.php";
-    $image = new SimpleImage();
-    $image->load($upload_path);
-    $image->resizeToWidth(150);
-    $image->save($resize_path);
+function calculate($a, $b, $operation) {
+    switch ($operation) {
+        case '/':
+            return division($a, $b);
+            break;
+        case '*':
+            return multiplication($a, $b);
+            break;
+        case '-':
+            return difference($a, $b);
+            break;
+        case '+':
+            return amount($a, $b);
+            break;
+    }
 }
