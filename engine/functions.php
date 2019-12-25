@@ -55,12 +55,14 @@ function division(float $a, float $b) {
         return $a / $b;
     }
 }
-function calculate($a, $b, $operation) {
+function calculate(float $a, float $b, string $operation) {
     switch ($operation) {
         case '/':
             return division($a, $b);
             break;
         case '*':
+        case 'x':
+        case 'х':
             return multiplication($a, $b);
             break;
         case '-':
