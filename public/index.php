@@ -8,10 +8,28 @@ if (isset($_GET['page'])) {
 
 switch ($page) {
     case 'gallery':
+        //Подключение к БД
+        $db = connectDB();
+        //Загрузка галереи
         $params['gallery'] = getGallery($db);
+        //Загрузка новой картинки
+        if (isset($_POST["load"])) {
+            uploadNewImg($db, $_FILES["myFile"]);
+        }
         break;
     case 'img_full':
-        $params['imgFull'] = getOneImg($db, $_GET['imgID']);
+        //Подключение к БД
+        $db = connectDB();
+        //Загрузка полноразмерной картинки
+        $imgFull = getOneImg($db, $_GET['imgID']);
+        //передача параметров
+        if (isset($imgFull)) {
+            $params = array_merge($params, $imgFull);
+        }
+        //Увеличение просмотров
+        if (!viewsIncrement($db, $params['id'])) {
+            Die("Проблема с просмотрами");
+        }
         break;
 }
 $params['db'] = $db;
