@@ -19,6 +19,8 @@ function renderLayout($page, $params = []) {
     return renderTemplate("layout", [
         "content" => renderTemplate($page, $params),
         "menu" => renderTemplate("menu", $params),
+        "scripts" => renderTemplate("scripts", $params),
+        "links" => renderTemplate("links", $params),
     ]);
 }
 

@@ -1,5 +1,5 @@
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<link rel="stylesheet" href="css/calc.css">
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+<!--<link rel="stylesheet" href="css/calc.css">-->
 <div id="core" @keyup="">
 	<input v-model="window" type="text" name="num" disabled>
 	<div class="container4">
@@ -21,4 +21,4 @@
 		</div>
 	</div>
 </div>
-<script src="js/calc_vue.js"></script>
+<!--<script src="js/calc_vue.js"></script>-->

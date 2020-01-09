@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
 <div id="core">
 	<input v-model="x" type="number" name="x">
 	<select v-model="operation" name="operation">
@@ -11,4 +11,4 @@
 	<button type="button" @click="fetchRequest()"> = </button>
 	<input v-model="result" type="number" name="result">
 </div>
-<script src="js/calc_vue.js"></script>
+<!--<script src="js/calc_vue.js"></script>-->

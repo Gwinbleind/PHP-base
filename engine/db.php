@@ -4,18 +4,42 @@ function connectDB() {
     $db = @mysqli_connect('localhost:3306','geek','geek','gb_php') or Die('Ошибка соединения: ' . mysqli_connect_error());
     return $db;
 }
-function sendQuery($db, $query) {
-    return mysqli_query($db, $query);
+function getArray($db, $query) {
+    $queryObject = mysqli_query($db, $query);
+    $queryArray = [];
+    while ($row = mysqli_fetch_assoc($queryObject)) {
+        $queryArray[] = $row;
+    }
+    return $queryArray;
 }
+function updateRow($db, $table, $condition, $rowData) {
+    return mysqli_query($db, "UPDATE {$table} SET {$rowData} WHERE {$condition}");
+}
+function deleteRow($db, $table, $condition) {
+    return mysqli_query($db, "DELETE FROM {$table} WHERE {$condition}");
+}
+
+function getFeedback($db, $imgID) {
+    return getArray($db, "SELECT * FROM gallery_feedback WHERE img_id={$imgID} ORDER BY id DESC");
+}
+function getOneFeedback($db, $feedbackID) {
+    return getArray($db, "SELECT * FROM gallery_feedback WHERE id={$feedbackID}")[0];
+}
+function editOneFeedback ($db, $id, $name, $text) {
+    return updateRow($db, "gallery_feedback", "id={$id}", "name='{$name}',text='{$text}'");
+}
+function deleteFeedback ($db, $id) {
+    return deleteRow($db,"gallery_feedback","id={$id}");
+}
+
 function getGallery($db) {
-    return sendQuery($db, 'SELECT * FROM gallery ORDER BY views DESC');
+    return getArray($db, "SELECT * FROM gallery ORDER BY views DESC");
 }
 function getOneImg($db, $id) {
-    $result = mysqli_query($db,"SELECT `id`, `img`, `name`, `views` FROM `gallery` WHERE `id`={$id}");
-    return $result->fetch_assoc();  //Переделать ООП в функцию
+    return getArray($db, "SELECT `id`, `img`, `name`, `views` FROM `gallery` WHERE `id`={$id}")[0];
 }
 function viewsIncrement ($db, $id) {
-    return mysqli_query($db, "UPDATE `gallery` SET `views`=`views`+1 WHERE `id`={$id}");
+    return updateRow($db, "gallery", "id={$id}", "views=views+1");
 }
 function insertNewRow($db, $name) {
     return mysqli_query($db, "INSERT INTO gallery (`id`, `img`, `prev`, `name`, `views`) VALUES (NULL, 'gallery/big/{$name}', 'gallery/small/{$name}', '{$name}', '0');");
@@ -43,4 +67,7 @@ function resizeImg($upload_path, $resize_path) {
     $image->load($upload_path);
     $image->resizeToWidth(150);
     $image->save($resize_path);
+}
+function safeData($db, string $data) {
+    return mysqli_real_escape_string($db, (string)htmlspecialchars(strip_tags($data)));
 }

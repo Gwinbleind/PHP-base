@@ -1,5 +1,5 @@
 <?php
-include realpath('../engine/render.php');
+include realpath('../engine/calc.php');
 
 $data = json_decode(file_get_contents('php://input'));
 $result = calculate($data->x, $data->y, $data->operation);
