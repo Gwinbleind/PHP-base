@@ -105,6 +105,24 @@ switch ($page) {
                 break;
         }
         break;
+    case 'catalog':
+        $params['links'] = [
+            'style_catalog' => 'css/style.css',
+            'lato_font' => 'https://fonts.googleapis.com/css?family=Lato:100,300,400,700&display=swap',
+            'font_awesome' => 'https://use.fontawesome.com/7f8eaeebe5.css',
+        ];
+        $db = connectDB();
+        $params['catalog'] = getCatalog($db);
+        break;
+    case 'product':
+        $params['links'] = [
+            'style_catalog' => 'css/style.css',
+            'lato_font' => 'https://fonts.googleapis.com/css?family=Lato:100,300,400,700&display=swap',
+            'font_awesome' => 'https://use.fontawesome.com/7f8eaeebe5.css',
+        ];
+        $db = connectDB();
+        $params['product'] = getProductByID($db,$id);
+        break;
 }
 
 $message = [

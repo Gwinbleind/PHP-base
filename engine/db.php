@@ -71,3 +71,10 @@ function resizeImg($upload_path, $resize_path) {
 function safeData($db, string $data) {
     return mysqli_real_escape_string($db, (string)htmlspecialchars(strip_tags($data)));
 }
+
+function getCatalog($db) {
+    return getArray($db, "SELECT * FROM `catalog` ORDER BY id");
+}
+function getProductByID($db, $id) {
+    return getArray($db, "SELECT * FROM `catalog` WHERE id={$id}")[0];
+}
