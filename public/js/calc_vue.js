@@ -37,15 +37,19 @@ const app = new Vue({
          console.log(k);
          switch (true) {
             case digitRegExp.test(k):
+               //нажата цифра
                this.valueClickHandler({target: {value: k}});
                break;
             case k === '.' || k === ',':
+               //нажата точка
                this.pointClickHandler({});
                break;
             case operationRegExp.test(k):
+               //нажата операция
                this.operationClickHandler({target: {value: k}});
                break;
             case k === '=' || k === 'Enter':
+               //запрошен результат
                this.calculateClickHandler({target: {value: k}});
                break;
          }
